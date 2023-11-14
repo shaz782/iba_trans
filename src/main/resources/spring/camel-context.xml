@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd      http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd               http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+    <bean class="com.iba.IBAsub" id="ibasubscriberServiceBean"/>
+	<bean class="com.iba.MyExchangeClass" id="myExchangeClass"/>
+	<bean class="com.iba.FinalMyExchange" id="finalMyExchange"/>
+	<bean class="com.iba.DynamicRouterBean" id="dynamicRouterBean"/>
+	
+
+
+    <camelContext id="sub" xmlns="http://camel.apache.org/schema/spring">
+        <!-- Expose the SOAP service using CXF -->
+        <route id="selfsub_route1">
+            <!--from id="_from1" uri="cxf:bean:soapEndpoint1"/>-->
+            <from id="sub_from1" uri="cxf:bean:selfSubServiceEndpoint"/>
+            <to id="sub_to1" uri="direct:callSelfcare"/>
+        </route>
+
+        <route id="sub_route2">
+            <from id="sub_from2" uri="direct:callSelfcare"/>
+            <log  message="Request Body: ${body}"/>
+ <log message="Received request for operation: ${header.operationName}"/>
+   	<!-- <dynamicRouter>
+        <method method="route" ref="dynamicRouterBean" />
+    </dynamicRouter>-->
+
+
+          <bean id="sub_bean1" method="getSubTPDetails" ref="ibasubscriberServiceBean"/>
+            <log  message="Response Object: ${body}"/>
+           <bean id="_bean1" method="processResponse" ref="myExchangeClass"/>
+ 			<to id="sub_to" uri="direct:callSelfcare2"/>
+    
+        
+          
+        </route>
+
+
+      <!-- <route id="selfsub_route">
+            <from id="sub_from" uri="cxf:bean:selfSubServiceEndpoint2"/>
+            <to id="sub_to" uri="direct:callSelfcare2"/>
+        </route> -->  
+
+        <route id="sub_route">
+            <from id="sub_from" uri="direct:callSelfcare2"/>
+            <log id="_log" message="Request Body: ${body}"/>
+            <bean id="sub_bean" method="getSubTPDetails" ref="ibasubscriberServiceBean"/>
+            <log id="_log" message="Response Object: ${body}"/>
+		 <bean id="_bean2" method="processResponse" ref="finalMyExchange"/>
+        </route>
+    </camelContext>
+
+    <cxf:cxfEndpoint address="http://localhost:9091/Services/selfSub"
+        id="selfSubServiceEndpoint" serviceClass="com.iba.IBAsub"/>
+
+    <!--<cxf:cxfEndpoint address="http://localhost:9091/Services/selfSub2"
+        id="selfSubServiceEndpoint2" serviceClass="com.iba.IBAsub"/> -->
+   
+</beans>

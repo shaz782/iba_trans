@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.xius</groupId>
+	<artifactId>trans-iba</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>MSPGWAPP</name>
+	<description>MSPGWAPP in Spring</description>
+	<packaging>jar</packaging>
+	<!-- <packaging>war</packaging> -->
+	<properties>
+		<java.version>1.8</java.version>
+		<maven.test.skip>true</maven.test.skip>
+		<httpclient.version>4.5.4</httpclient.version>
+		<cxf.version>3.4.2</cxf.version>
+	</properties>
+
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.2</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-batch</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.apache.axis</groupId> <artifactId>axis</artifactId> 
+			<version>1.4</version> </dependency> -->
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>com.sun.xml.ws</groupId> <artifactId>jaxws-rt</artifactId> 
+			<version>2.2.10</version> </dependency> -->
+
+		<dependency>
+			<groupId>org.apache.axis</groupId>
+			<artifactId>axis</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+
+
+		<!-- <dependency> <groupId>MSPGWServicesxsds</groupId> <artifactId>MSPGWServicesxsds</artifactId> 
+			<scope>system</scope> <version>1.0</version> <systemPath>${basedir}/src/main/resources/lib/MSPGWServicesxsds.jar</systemPath> 
+			</dependency> <dependency> <groupId>MSPGWWsdls</groupId> <artifactId>MSPGWWsdls</artifactId> 
+			<scope>system</scope> <version>1.0</version> <systemPath>${basedir}/src/main/resources/lib/MSPGWWsdls.jar</systemPath> 
+			</dependency> -->
+
+
+		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>commons-discovery</groupId>
+			<artifactId>commons-discovery</artifactId>
+			<version>0.5</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.xml/jaxrpc -->
+		<dependency>
+			<groupId>javax.xml</groupId>
+			<artifactId>jaxrpc</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<!-- cxf-tools-common jar added for to convert xsd:Date to java.util.Date 
+			by using bind.xjc at the time of wsdl to java conversion -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-tools-common</artifactId>
+			<version>2.7.9</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			 <version>3.14.0</version>
+		</dependency>
+
+		<!-- CXF dependencies -->
+		<!-- <dependency> <groupId>org.apache.cxf</groupId> <artifactId>cxf-rt-frontend-jaxws</artifactId> 
+			<version>2.7.9</version> </dependency> <dependency> <groupId>org.apache.cxf</groupId> 
+			<artifactId>cxf-rt-frontend-simple</artifactId> <version>2.7.9</version> 
+			</dependency> -->
+		<!-- <dependency> <groupId>org.jvnet.annox</groupId> <artifactId>annox</artifactId> 
+			<version>1.0.2</version> </dependency> -->
+
+		<!-- <dependency> <groupId>org.eclipse.persistence</groupId> <artifactId>org.eclipse.persistence.moxy</artifactId> 
+			<version>2.6.8</version> </dependency> -->
+
+		<!-- <dependency> <groupId>org.glassfish.jaxb</groupId> <artifactId>jaxb-xjc</artifactId> 
+			<version>4.0.3</version> </dependency> -->
+		<!-- Thanks for using https://jar-download.com -->
+
+
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>commons-net</id>
+			<url>https://mvnrepository.com/artifact/commons-net/commons-net</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.iba.Application</mainClass>
+					<layout>ZIP</layout>
+					<addResources>true</addResources>
+					<finalName>mspgwApp-1.0.0.0</finalName>
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
+				<goals>
+					<goal>repackage</goal>
+				</goals>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>com.iba.Application</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<!-- <executions> <execution> <id>copy</id> <phase>install</phase> <goals> 
+					<goal>copy-dependencies</goal> </goals> <configuration> <outputDirectory> 
+					${project.build.directory}/lib </outputDirectory> </configuration> </execution> 
+					</executions> -->
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>generated/src/main/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+
+
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+
+							<defaultOptions>
+								<bindingFiles>
+									<bindingFile>${basedir}/src/main/resources/bindings.xml</bindingFile>
+								</bindingFiles>
+								<noAddressBinding>true</noAddressBinding>
+							</defaultOptions>
+
+							<sourceRoot>${project.basedir}/generated/src/main/java</sourceRoot>
+							<wsdlRoot>${basedir}/src/main/resources</wsdlRoot>
+							<includes>
+
+								<include>SubscriberManagement.wsdl</include>
+
+							</includes>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+
+
+
+		</plugins>
+	</build>
+
+
+</project>
